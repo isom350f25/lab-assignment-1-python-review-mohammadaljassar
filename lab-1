@@ -1,1 +1,46 @@
+def get_shopping_list():
+    item_names = []
+    item_prices = []
 
+    while True:
+        item_name = input("Enter item name (or press Enter to finish): ")
+        if not item_name:
+            break
+
+        while True:
+            try:
+                price_input = input(f"Enter price for {item_name}: ")
+                price = float(price_input)
+                if 0 <= price <= 200:
+                    item_names.append(item_name)
+                    item_prices.append(price)
+                    break
+                else:
+                    print("Error: Price must be between 0 and 200.")
+            except ValueError:
+                print("Error: Please enter a valid number for the price.")
+
+    if not item_names:
+        print("\nNo items were entered.")
+        return
+
+    num_items = len(item_names)
+    print(f"Number of items: {num_items}")
+
+    average_price = sum(item_prices) / num_items
+    print(f"Average price: ${average_price:.2f}")
+
+    max_price = max(item_prices)
+    min_price = min(item_prices)
+
+    highest_item_index = item_prices.index(max_price)
+    lowest_item_index = item_prices.index(min_price)
+
+    highest_item_name = item_names[highest_item_index]
+    lowest_item_name = item_names[lowest_item_index]
+
+    print(f"Highest priced item: {highest_item_name} (${max_price})")
+    print(f"Lowest priced item: {lowest_item_name} (${min_price})")
+
+if __name__ == "__main__":
+    get_shopping_list()
